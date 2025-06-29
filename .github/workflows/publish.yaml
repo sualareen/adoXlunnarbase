@@ -33,13 +33,13 @@ jobs:
       - name: 🧐 Debug step - Check if PAT Secret is available
         env:
           # 我们在这里尝试把您设置的秘密读取到一个环境变量中
-          MY_PAT_SECRET: ${{ secrets.GH_PAT }}
+          MY_PAT_SECRET: ${{ secrets.QUARTO_PAT }}
         run: |
           echo "Checking for the GH_PAT secret..."
           if [[ -n "$MY_PAT_SECRET" ]]; then
-            echo "✅ SUCCESS: The secret 'GH_PAT' was found and loaded."
+            echo "✅ SUCCESS: The secret 'QUARTO_PAT' was found and loaded."
           else
-            echo "❌ FAILURE: The secret 'GH_PAT' was NOT found. The workflow will fall back to the default token, causing a 403 error."
+            echo "❌ FAILURE: The secret 'QUARTO_PAT' was NOT found. The workflow will fall back to the default token, causing a 403 error."
             echo "Please double-check that you have created a repository secret named EXACTLY 'GH_PAT' in this repository's Settings > Secrets and variables > Actions."
             # 我们让这个步骤失败，这样就不用执行后面的发布步骤了
             exit 1
@@ -51,4 +51,4 @@ jobs:
         with:
           target: gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.QUARTO_PAT }}
