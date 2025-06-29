@@ -1,11 +1,10 @@
 # 工作流名称
 name: Render and Publish Website
 
-# 触发工作流的条件：当有代码推送到 main 分支时
+# 触发工作流的条件
 on:
   push:
     branches: [ main ]
-  # 允许您在 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
 
 # 设置工作流的权限
@@ -15,9 +14,8 @@ permissions:
   id-token: write
 
 jobs:
-  # 定义一个名为 build-and-deploy 的任务
   build-and-deploy:
-    # 在最新的 Ubuntu 环境中运行（只需要这一个环境）
+    # 在最新的 Ubuntu 环境中运行
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +23,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 第二步：安装并设置 Quarto（使用公开的、正确的动作）
+      # 第二步：安装并设置 Quarto
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
@@ -35,5 +33,4 @@ jobs:
         with:
           target: gh-pages
         env:
-          # GITHUB_TOKEN 是由 GitHub 自动提供的，无需您自己设置
-          GITHUB_TOKEN: ${{ secrets.QUARTO_PAT }}
+          GITHUB_TOKEN: ${{ secrets.QUARTO_PAT }} # <--- 使用 GH_PAT 并确保 env: 的位置正确
