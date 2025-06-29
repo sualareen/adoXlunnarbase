@@ -36,4 +36,4 @@ jobs:
           target: gh-pages
         env:
           # GITHUB_TOKEN 是由 GitHub 自动提供的，无需您自己设置
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.Quarto_PAT }}
