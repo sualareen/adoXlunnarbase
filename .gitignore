@@ -4,6 +4,7 @@
 # Ignore the rendered website output and cache directories
 /_site/
 /_quarto/
+/.quarto/
 
 # Ignore other R Markdown / Knitr generated files and caches
 *.html
