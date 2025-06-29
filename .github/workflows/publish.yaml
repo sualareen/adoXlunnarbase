@@ -1,13 +1,11 @@
-# 工作流名称
+
 name: Render and Publish Website (with PAT Auth)
 
-# 触发工作流的条件
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
-# 设置工作流的权限
 permissions:
   contents: read
   pages: write
@@ -15,32 +13,28 @@ permissions:
 
 jobs:
   build-and-deploy:
-    # 在最新的 Ubuntu 环境中运行
     runs-on: ubuntu-latest
 
     steps:
-      # 第一步：检出您的仓库代码
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 第二步：安装并设置 Quarto
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # 第三步：手动认证并发布网站（采纳您的方案）
       - name: Configure Git, Render and Publish
         env:
-          # 读取您在 GitHub Secrets 中设置的个人访问令牌
           QUARTO_PAT: ${{ secrets.QUARTO_PAT }}
         run: |
-          # 配置 git 用户信息
+          # 配置 Git 用户信息
           git config --global user.name "sualareen"
           git config --global user.email "sualareen@users.noreply.github.com"
-          
-          # 关键步骤：修改远程仓库 URL，将您的 PAT 令牌嵌入其中
-          # 这会强制后续的 git push 使用您的个人令牌进行认证
+
+          # 使用 PAT 设置远程仓库 URL
           git remote set-url origin https://x-access-token:${{ env.QUARTO_PAT }}@github.com/${{ github.repository }}
-          
-          # 最后，执行 quarto publish 命令
-          # 它内部的 git push 操作现在会使用上面配置好的、带有 PAT 的 URL
+
+          # ✅ 调试：确认 remote 配置是否生效
+          git remote -v
+
+          # 构建并发布网站到 gh-pages 分支
           quarto publish gh-pages
