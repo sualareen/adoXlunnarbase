@@ -1,0 +1,37 @@
+# -------------------------
+# Quarto / R Markdown Files
+# -------------------------
+# Ignore the rendered website output and cache directories
+/_site/
+/_quarto/
+
+# Ignore other R Markdown / Knitr generated files and caches
+*.html
+*.pdf
+*_files/
+*_cache/
+
+
+# --------------------------------
+# RStudio / R Specific Files
+# (Recommended if using RStudio)
+# --------------------------------
+.Rproj.user/
+.Rhistory
+.RData
+.Renviron
+.Ruserdata
+
+
+# ---------------------------------
+# General Operating System Files
+# ---------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
