@@ -1,59 +1,39 @@
-name: publish.yaml
+# 工作流名称
+name: Render and Publish Website
 
-permissions: read-all
-
+# 触发工作流的条件：当有代码推送到 main 分支时
 on:
   push:
-    branches: [main, master]
-  pull_request:
+    branches: [ main ]
+  # 允许您在 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
-    inputs:
-      version:
-        description: |
-          Quarto version, may be "release", "pre-release" or a version number.
-        required: true
-        default: 'release'
-        type: string
-      tinytex:
-        description: 'If true, install TinyTex, required for PDF rendering'
-        required: false
-        default: 'false'
+
+# 设置工作流的权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  quarto-setup:
-    runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.os }} (${{ inputs.version || matrix.version }})
-
-    strategy:
-      fail-fast: false
-      matrix:
-        version: ${{ inputs.version && fromJSON(format('["{0}"]', inputs.version)) || fromJSON('["release", "pre-release"]') }}
-        config:
-          # Default config for standard platforms
-          - os: macos-latest
-          - os: macos-13
-          - os: windows-latest
-            tinytex: 'false'
-          - os: ubuntu-latest
-          # Special config for ARM
-          - os: ubuntu-22.04-arm
-            tinytex: 'false'
+  # 定义一个名为 build-and-deploy 的任务
+  build-and-deploy:
+    # 在最新的 Ubuntu 环境中运行（只需要这一个环境）
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 第一步：检出您的仓库代码
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - uses: ./setup
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 第二步：安装并设置 Quarto（使用公开的、正确的动作）
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      # 第三步：渲染并发布到 GitHub Pages
+      - name: Publish to GitHub Pages
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
-          version: ${{ matrix.version }}
-          tinytex: ${{ inputs.tinytex || matrix.config.tinytex || 'true' }}
-
-      - run: quarto --version
-
-      - run: which quarto
-        if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
-
-      - run: where.exe quarto
-        if: ${{ runner.os == 'Windows' }}
-
+          target: gh-pages
+        env:
+          # GITHUB_TOKEN 是由 GitHub 自动提供的，无需您自己设置
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
