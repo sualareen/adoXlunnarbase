@@ -1,5 +1,5 @@
 # 工作流名称
-name: Render and Publish Website (with Debug Step)
+name: Render and Publish Website (with PAT Auth)
 
 # 触发工作流的条件
 on:
@@ -27,28 +27,20 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # =======================================================
-      # 第三步：【新增的调试步骤】
-      # =======================================================
-      - name: 🧐 Debug step - Check if PAT Secret is available
+      # 第三步：手动认证并发布网站（采纳您的方案）
+      - name: Configure Git, Render and Publish
         env:
-          # 我们在这里尝试把您设置的秘密读取到一个环境变量中
-          MY_PAT_SECRET: ${{ secrets.QUARTO_PAT }}
+          # 读取您在 GitHub Secrets 中设置的个人访问令牌
+          QUARTO_PAT: ${{ secrets.QUARTO_PAT }}
         run: |
-          echo "Checking for the GH_PAT secret..."
-          if [[ -n "$MY_PAT_SECRET" ]]; then
-            echo "✅ SUCCESS: The secret 'QUARTO_PAT' was found and loaded."
-          else
-            echo "❌ FAILURE: The secret 'QUARTO_PAT' was NOT found. The workflow will fall back to the default token, causing a 403 error."
-            echo "Please double-check that you have created a repository secret named EXACTLY 'GH_PAT' in this repository's Settings > Secrets and variables > Actions."
-            # 我们让这个步骤失败，这样就不用执行后面的发布步骤了
-            exit 1
-          fi
-
-      # 第四步：渲染并发布到 GitHub Pages
-      - name: Publish to GitHub Pages
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.QUARTO_PAT }}
+          # 配置 git 用户信息
+          git config --global user.name "sualareen"
+          git config --global user.email "sualareen@users.noreply.github.com"
+          
+          # 关键步骤：修改远程仓库 URL，将您的 PAT 令牌嵌入其中
+          # 这会强制后续的 git push 使用您的个人令牌进行认证
+          git remote set-url origin https://x-access-token:${{ env.QUARTO_PAT }}@github.com/${{ github.repository }}
+          
+          # 最后，执行 quarto publish 命令
+          # 它内部的 git push 操作现在会使用上面配置好的、带有 PAT 的 URL
+          quarto publish gh-pages
