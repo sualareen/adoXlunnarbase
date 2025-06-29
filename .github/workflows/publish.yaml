@@ -1,5 +1,5 @@
 # 工作流名称
-name: Render and Publish Website
+name: Render and Publish Website (with Debug Step)
 
 # 触发工作流的条件
 on:
@@ -27,10 +27,28 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # 第三步：渲染并发布到 GitHub Pages
+      # =======================================================
+      # 第三步：【新增的调试步骤】
+      # =======================================================
+      - name: 🧐 Debug step - Check if PAT Secret is available
+        env:
+          # 我们在这里尝试把您设置的秘密读取到一个环境变量中
+          MY_PAT_SECRET: ${{ secrets.GH_PAT }}
+        run: |
+          echo "Checking for the GH_PAT secret..."
+          if [[ -n "$MY_PAT_SECRET" ]]; then
+            echo "✅ SUCCESS: The secret 'GH_PAT' was found and loaded."
+          else
+            echo "❌ FAILURE: The secret 'GH_PAT' was NOT found. The workflow will fall back to the default token, causing a 403 error."
+            echo "Please double-check that you have created a repository secret named EXACTLY 'GH_PAT' in this repository's Settings > Secrets and variables > Actions."
+            # 我们让这个步骤失败，这样就不用执行后面的发布步骤了
+            exit 1
+          fi
+
+      # 第四步：渲染并发布到 GitHub Pages
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.QUARTO_PAT }} # <--- 使用 GH_PAT 并确保 env: 的位置正确
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
