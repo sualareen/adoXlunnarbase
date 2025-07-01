@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://sualareen.github.io/adoXlunnarbase/日本語.html</loc>
+    <lastmod>2025-07-01T04:37:05.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sualareen.github.io/adoXlunnarbase/qmdlib/jlpt/201607N3.html</loc>
+    <lastmod>2025-07-01T08:20:42.067Z</lastmod>
+  </url>
+  <url>
     <loc>https://sualareen.github.io/adoXlunnarbase/index.html</loc>
-    <lastmod>2025-07-01T08:28:38.719Z</lastmod>
+    <lastmod>2025-07-01T03:43:05.468Z</lastmod>
   </url>
   <url>
     <loc>https://sualareen.github.io/adoXlunnarbase/about.html</loc>
     <lastmod>2025-06-29T20:38:24.798Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sualareen.github.io/adoXlunnarbase/qmdlib/jisho/能動.html</loc>
+    <lastmod>2025-07-01T04:51:50.626Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sualareen.github.io/adoXlunnarbase/qmdlib/ハイコンテクスト.html</loc>
+    <lastmod>2025-07-01T04:36:16.539Z</lastmod>
   </url>
 </urlset>
