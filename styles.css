@@ -1,1 +1,54 @@
-/* css styles */
+/* --- 替换为下面这些新的、更灵活的规则 --- */
+
+/* 1. 通用的选项容器 */
+/* 我们将 .four-options 改名为更通用的 .options-container */
+.options-container {
+  display: grid; /* 关键！启用 Grid 布局 */
+  padding: 0; 
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* 2. 控制列数的“修饰符”类 */
+/* 当容器有 .cols-4 这个类时，创建4个等宽的列 */
+.options-container.cols-4 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 当容器有 .cols-2 这个类时，创建2个等宽的列 */
+.options-container.cols-2 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 当容器有 .cols-1 这个类时，只创建1个列 */
+.options-container.cols-1 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+
+/* 3. 选项本身的样式 */
+.option {
+  text-align: left;
+  /* 为选项增加一些内边距和边框，看得更清楚 */
+  margin: 0;
+  padding: 0; 
+  box-sizing: border-box; /* 保持这个好习惯 */
+  /* border: 1px solid #eee; */
+  border-radius: 4px;
+}
+
+/* --- 新增这条规则，专门处理选项内部的列表 --- */
+.option ol {
+  margin: 0;       /* 关键：移除列表自带的上下外边距 */
+  padding: 0; 
+  padding-left: 0; /* 关键：移除列表自带的左侧缩进内边距 */
+}
+
+/* 新增这条规则，只移除作为题目的段落的下外边距 */
+.option p {
+  margin-bottom: 0;
+  /* 您也可以设为更小的值，比如 margin-bottom: 0.5em; */
+}
