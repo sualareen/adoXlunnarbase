@@ -9,11 +9,10 @@
   line-height: 1.6;
 }
 
-/* 2. 控制列数的“修饰符”类 */
-/* 当容器有 .cols-4 这个类时，创建4个等宽的列 */
-.options-container.cols-4 {
+/* 当容器有 .cols-1 这个类时，只创建1个列 */
+.options-container.cols-1 {
   padding: 0em 0em 0.5em 1.5em;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
 }
 
 /* 当容器有 .cols-2 这个类时，创建2个等宽的列 */
@@ -22,12 +21,42 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* 当容器有 .cols-1 这个类时，只创建1个列 */
-.options-container.cols-1 {
+/* 当容器有 .cols-2 这个类时，创建2个等宽的列 */
+.options-container.cols-3 {
   padding: 0em 0em 0.5em 1.5em;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
+/* 2. 控制列数的“修饰符”类 */
+/* 当容器有 .cols-4 这个类时，创建4个等宽的列 */
+.options-container.cols-4 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 当容器有 .cols-5 这个类时，创建5个等宽的列 */
+.options-container.cols-5 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* 当容器有 .cols-6 这个类时，创建6个等宽的列 */
+.options-container.cols-6 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* 当容器有 .cols-7 这个类时，创建7个等宽的列 */
+.options-container.cols-7 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* 当容器有 .cols-8 这个类时，创建8个等宽的列 */
+.options-container.cols-8 {
+  padding: 0em 0em 0.5em 1.5em;
+  grid-template-columns: repeat(8, 1fr);
+}
 
 /* 3. 选项本身的样式 */
 .option {
