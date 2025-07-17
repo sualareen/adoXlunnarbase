@@ -81,3 +81,7 @@
   margin-bottom: 0;
   /* 您也可以设为更小的值，比如 margin-bottom: 0.5em; */
 }
+
+mark.case {
+  background-color: aquamarine;
+}
