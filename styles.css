@@ -85,3 +85,7 @@
 mark.case {
   background-color: aquamarine;
 }
+
+mark.verb {
+  background-color: coral;
+}

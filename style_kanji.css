@@ -1,0 +1,79 @@
+/* styles.css */
+body { 
+    font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+    color: #333;
+}
+
+table {
+    /* 强制使用固定布局算法以支持自动换行 */
+    table-layout: fixed;
+    width: 100%; 
+    
+    border-collapse: collapse;
+    max-width: 800px;
+    margin: 20px 0;
+    font-size: 16px;
+    
+    /* 将表格外边框设置为1px黑色实线 */
+    border: 1px solid #000; 
+}
+
+th, td {
+    /* 将单元格边框设置为1px黑色实线 */
+    border: 1px solid #000;
+    
+    padding: 10px 12px;
+    text-align: left;
+    
+    /* 允许长单词或字符串换行 */
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+th {
+    background-color: #f5f5f1;
+    font-weight: bold;
+    width: 120px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+td {
+    vertical-align: top;
+}
+
+a {
+    color: #0e61e6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.kaku_num {
+    font-size: 14px;
+    color: #666;
+    margin-left: 5px;
+}
+
+.yomi_icon {
+    width: 16px;  /* 保持一个合适的图标尺寸 */
+    height: 16px;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.yomi_icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.jp_icon3 {
+    width: 30px;
+    height: 20px;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
