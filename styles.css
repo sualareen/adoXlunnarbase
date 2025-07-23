@@ -82,10 +82,30 @@
   /* 您也可以设为更小的值，比如 margin-bottom: 0.5em; */
 }
 
+.option table th,
+.option table td {
+  text-align: center;      /* 水平居中 */
+  vertical-align: middle;  /* 垂直居中 */
+}
+
+/*为元音添加橙色背景*/
+/* --- 新增：为 class="vowels" 的行添加橙色背景 --- */
+.option table tr.vowels {
+  background-color: #FFE5B4; /* 这是一个柔和的橙色 (Moccasin) */
+}
+/* 您也可以使用其他橙色，例如：
+   background-color: orange;
+   background-color: #FFDAB9; (PeachPuff)
+*/
+
 mark.case {
   background-color: aquamarine;
 }
 
 mark.verb {
   background-color: coral;
+}
+
+mark.qiao {
+  background-color: limegreen;
 }
