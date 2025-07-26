@@ -1,4 +1,18 @@
 /* --- 替换为下面这些新的、更灵活的规则 --- */
+  /* 针对拥有 "bordered-table" 类的表格 */
+.bordered-table {
+  border-collapse: collapse; /* 将单元格边框合并为单一边框 */
+  width: 100%;             /* 表格宽度为100% */
+  border: 1px solid black;   /* 为表格自身添加一个外边框 */
+}
+/* 针对 "bordered-table" 内的所有 th 和 td 单元格 */
+.bordered-table th,
+.bordered-table td {
+  border: 1px solid black; /* 为每个单元格设置1像素的黑色实线边框 */
+  padding: 8px;            /* 设置单元格内边距，让文字不紧贴边框 */
+  text-align: left;        /* 文字左对齐 */
+  vertical-align: middle;  /* 垂直居中对齐，对于跨行的单元格效果更好 */
+}
 
 /* 1. 通用的选项容器 */
 /* 我们将 .four-options 改名为更通用的 .options-container */
@@ -109,3 +123,6 @@ mark.verb {
 mark.qiao {
   background-color: limegreen;
 }
+
+/*这是关于kanji的一切css设计*/
+.kanji {}
